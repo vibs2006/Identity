@@ -4,4 +4,35 @@
 }
 
 <h2>Authenticated - @Model</h2>
+<form name="form1" method="post" enctype="multipart/form-data" action="/test/post">
+    <div>
+        <input type="button" value="test" id="btnTest" />
+    </div>
+</form>
+<div id="divDynamic">
+</div>
 
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+        $(document).ready(function () {
+            $("#btnTest").on("click", function () {
+                $.get("http://garima.archiadc.com/ws1/webservice1.asmx/statesList", function (data) {
+                    console.clear();
+                    //console.log(JSON.parse(data));
+                    var stateListObject = JSON.parse(data);
+                    var arrayData = stateListObject.StateList;
+                    var str = '';
+                    $.each(arrayData, function (index, element) {
+                        debugger;
+                        str = str + "<br />" + element.stateName;
+                    });
+
+
+                    $("#divDynamic").html(str);
+
+
+
+                });
+            });
+        });
+</script>
